@@ -23,6 +23,6 @@ public class UserRegistrationDTO {
 
     @NotBlank(message = "Phone number is required")
     @Size(min = 10,max = 10,message = "Phone number must have 10 digits")
-    @Pattern(regex = "^[0-9]*$",message = "Phone number must contain only digits")
+    @Pattern(regexp = "^[0-9]*$",message = "Phone number must contain only digits")
     private String phone;
 }
