@@ -32,4 +32,10 @@ public class UserController {
             throws UserNotFoundException, UserServiceLogicException {
         return userService.updateUser(userDetailsRequestDto, id);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<ApiResponseDto<?>> deleteUser(@PathVariable int id)
+            throws UserNotFoundException, UserServiceLogicException {
+        return userService.deleteUser(id);
+    }
 }
