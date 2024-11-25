@@ -18,5 +18,8 @@ public interface UserService {
     ResponseEntity<ApiResponseDto<?>> deleteUser(int id)
         throws UserNotFoundException, UserServiceLogicException;
 
+    ResponseEntity<ApiResponseDto<?>> updateUser(UserRegistrationDTO newUserDetails, int id)
+            throws UserNotFoundException, UserServiceLogicException;
+
 
 }
