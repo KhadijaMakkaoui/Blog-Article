@@ -65,7 +65,17 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public ResponseEntity<ApiResponseDto<?>> deleteUser(int id) throws UserNotFoundException, UserServiceLogicException {
-        return null;
+        try {
+            User user = userRepository.findById(id).orElseThrow(()->new UserNotFoundException("User not found with id " + id));
+            userRepository.delete(user);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ApiResponseDto<>(ApiResponseStatus.SUCCESS.name(), "User deleted successfully!"));
+        } catch (UserNotFoundException e) {
+            throw new UserNotFoundException(e.getMessage());
+        } catch (Exception e) {
+            log.error("Failed to delete user with id " + id + ": " + e.getMessage());
+            throw new UserServiceLogicException();
+        }
     }
 
     @Override
