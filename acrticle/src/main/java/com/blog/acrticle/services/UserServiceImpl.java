@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Component
 @Slf4j
@@ -51,7 +52,15 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public ResponseEntity<ApiResponseDto<?>> getAllUsers() throws UserNotFoundException, UserServiceLogicException {
-        return null;
+        try {
+            List<User> users = userRepository.findAllByOrderByRegDateTimeDesc();
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                   .body(new ApiResponseDto<>(ApiResponseStatus.SUCCESS.name(), users));
+        }catch (Exception e){
+            log.error("Failed to fetch all users: "+ e.getMessage());
+            throw new UserServiceLogicException();
+        }
     }
 
     @Override
