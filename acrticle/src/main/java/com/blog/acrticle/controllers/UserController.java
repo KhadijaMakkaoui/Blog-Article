@@ -26,4 +26,10 @@ public class UserController {
     public ResponseEntity<ApiResponseDto<?>> getAllUsers() throws UserServiceLogicException, UserNotFoundException {
         return userService.getAllUsers();
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ApiResponseDto<?>> updateUser(@Valid @RequestBody UserRegistrationDTO userDetailsRequestDto, @PathVariable int id)
+            throws UserNotFoundException, UserServiceLogicException {
+        return userService.updateUser(userDetailsRequestDto, id);
+    }
 }
