@@ -24,6 +24,11 @@ public class UserServiceExceptionHandler {
     public ResponseEntity<ApiResponseDto<?>> UserAlreadyExistsExceptionHandler(UserAlreadyExistsException exception) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ApiResponseDto<>(ApiResponseStatus.FAILURE.name(), exception.getMessage()));
     }
+    @ExceptionHandler(value = UserServiceLogicException.class)
+    public ResponseEntity<ApiResponseDto<?>> UserServiceLogicExceptionHandler(UserServiceLogicException exception) {
+        return ResponseEntity.badRequest().body(new ApiResponseDto<>(ApiResponseStatus.FAILURE.name(), exception.getMessage()));
+    }
+
 
 
 }
